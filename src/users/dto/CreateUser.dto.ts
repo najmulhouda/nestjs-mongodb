@@ -1,4 +1,11 @@
-import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsBoolean,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 
 export class CreateUserSettingDto {
   @IsOptional()
@@ -22,5 +29,8 @@ export class CreateUserDto {
   @IsOptional()
   displayName?: string;
 
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => CreateUserSettingDto)
   setting?: CreateUserSettingDto;
 }
